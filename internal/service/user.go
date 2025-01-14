@@ -10,5 +10,13 @@ type UserValidator interface {
 	Login(email, password string) (string, error)
 }
 type UserService struct {
-	data.UserStorage
+	Storage data.UserStorage
+}
+
+func (u UserService) Register(user models.User) error {
+	return u.Storage.Add(user)
+}
+
+func (u UserService) Login(email, password string) (string, error) {
+	return u.Storage.Login(email, password)
 }
