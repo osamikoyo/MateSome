@@ -23,5 +23,8 @@ func NewUserStorage() UserStorage {
 	if err != nil {
 		loger.New().Error().Err(err)
 	}
+
+	db.AutoMigrate(&models.User{})
+
 	return Users{db}
 }

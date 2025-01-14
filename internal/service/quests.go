@@ -5,6 +5,10 @@ import (
 	"github.com/osamikoyo/matesome/internal/data/models"
 )
 
+type QuestService struct {
+	data.QuestStorage
+}
+
 type QuestsValidator interface {
 	Add(quest models.Quest) error
 	GetByUserId(userid uint64) ([]models.Quest, error)
@@ -12,6 +16,17 @@ type QuestsValidator interface {
 	Delete(quest models.Quest) error
 }
 
-type QuestService struct {
-	data.QuestStorage
+func (q QuestService) Add(quest models.Quest) error {
+	return q.QuestStorage.Add(quest)
+}
+
+func (q QuestService) GetByUserId(userid uint64) ([]models.Quest, error) {
+	return q.QuestStorage.GetByUserId(userid)
+}
+func (q QuestService) GetByHashTags(hashtags models.HashTags) ([]models.Quest, error) {
+	return q.QuestStorage.GetByHashTags(hashtags)
+}
+
+func (q QuestService) Delete(quest models.Quest) error {
+	return q.QuestStorage.Delete(quest)
 }

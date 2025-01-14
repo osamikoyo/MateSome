@@ -19,7 +19,7 @@ func New() Handler {
 		},
 		Quest: QuestHandler{
 			service.QuestService{
-				data.NewQuestStorage(),
+				QuestStorage: data.NewQuestStorage(),
 			},
 		},
 	}

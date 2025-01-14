@@ -2,8 +2,10 @@ package data
 
 import (
 	"context"
+	"fmt"
 	"github.com/osamikoyo/matesome/internal/data/models"
 	"github.com/osamikoyo/matesome/pkg/loger"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"os"
@@ -11,27 +13,54 @@ import (
 )
 
 type Quests struct {
-	*mongo.Client
+	ctx context.Context
+	*mongo.Collection
 }
 
 func (q Quests) Add(quest models.Quest) error {
-	//TODO implement me
-	panic("implement me")
+	_, err := q.InsertOne(q.ctx, quest)
+	return err
 }
 
 func (q Quests) GetByUserId(userid uint64) ([]models.Quest, error) {
-	//TODO implement me
-	panic("implement me")
+	filter, err := q.Find(q.ctx, bson.M{
+		"user_id": fmt.Sprintf("%d", userid),
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	var quests []models.Quest
+
+	if err = filter.All(q.ctx, &quests); err != nil {
+		return nil, err
+	}
+	return quests, nil
 }
 
 func (q Quests) GetByHashTags(hashtags models.HashTags) ([]models.Quest, error) {
-	//TODO implement me
-	panic("implement me")
+	filter, err := q.Find(q.ctx, bson.M{
+		"hash_tag": bson.A{
+			hashtags.Tags,
+		},
+	})
+
+	if err != nil {
+		return nil, err
+	}
+
+	var quests []models.Quest
+
+	if err = filter.All(q.ctx, &quests); err != nil {
+		return nil, err
+	}
+	return quests, nil
 }
 
 func (q Quests) Delete(quest models.Quest) error {
-	//TODO implement me
-	panic("implement me")
+	_, err := q.DeleteOne(q.ctx, quest)
+	return err
 }
 
 func NewQuestStorage() Quests {
@@ -44,5 +73,7 @@ func NewQuestStorage() Quests {
 		loger.New().Error().Err(err)
 	}
 
-	return Quests{client}
+	collection := client.Database("main").Collection("quests")
+
+	return Quests{ctx: ctx, Collection: collection}
 }
