@@ -1,0 +1,11 @@
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      - go build -o ./bin/app cmd/server/main.go 
+  docker-run:
+    cmds:
+      - docker build -t matesome .
+      - docker run matesome -p 8080:8080 -t matesome
+          
