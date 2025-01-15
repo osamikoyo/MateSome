@@ -9,6 +9,7 @@ import (
 type UserValidator interface {
 	Register(user models.User) error
 	Login(email, password string) (string, error)
+	Get(email string) (models.User, error)
 }
 type UserService struct {
 	Storage data.UserStorage
@@ -31,4 +32,8 @@ func (u UserService) Login(email, password string) (string, error) {
 	}
 
 	return u.Storage.Login(email, string(hashpassword))
+}
+
+func (u UserService) Get(email string) (models.User, error) {
+	return u.Storage.Get(email)
 }

@@ -23,3 +23,14 @@ func (h UserHandler) registerHandler(c echo.Context) error {
 
 	return c.String(http.StatusCreated, "success!")
 }
+
+func (h UserHandler) loginHandler(c echo.Context) error {
+	email := c.FormValue("email")
+	password := c.FormValue("password")
+
+	token, err := h.Service.Login(email, password)
+	if err != nil {
+		return c.String(http.StatusBadRequest, err.Error())
+	}
+
+}
