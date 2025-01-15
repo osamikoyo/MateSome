@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    image: matesome  # Замените на имя вашего Docker-образа
+    build:
+      context: .  # Укажите путь к вашей директории с Dockerfile, если необходимо
+    ports:
+      - "8080:8080"  # Замените на нужный вам порт
+    environment:
+      POSTGRES_URL: postgres://user:password@db:5432  # URL для подключения к PostgreSQL
+      MONGO_URL: mongodb://mongo:27017  # URL для подключения к MongoDB
+    depends_on:
+      - db
+      - mongo
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: user  # Замените на ваше имя пользователя
+      POSTGRES_PASSWORD: password  # Замените на ваш пароль
+      POSTGRES_DB: users  # Замените на нужное имя базы данных
+    volumes:
+      - pg_data:/var/lib/postgresql/data  # Сохранение данных PostgreSQL при перезапуске
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_data:/data/db  # Сохранение данных MongoDB при перезапуске
+  
