@@ -34,6 +34,6 @@ func (u UserService) Login(email, password string) (string, error) {
 	return u.Storage.Login(email, string(hashpassword))
 }
 
-func (u UserService) Get(email string) (models.User, error) {
-	return u.Storage.Get(email)
+func (u UserService) Get(username string) (models.User, error) {
+	return u.Storage.Get(username)
 }

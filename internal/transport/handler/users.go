@@ -14,7 +14,7 @@ type UserHandler struct {
 func (h UserHandler) registerHandler(c echo.Context) error {
 	var user models.User
 	if err := c.Bind(&user); err != nil {
-		return c.String(http.StatusBadRequest, err.Error())
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
 
 	if err := h.Service.Register(user); err != nil {
@@ -30,7 +30,20 @@ func (h UserHandler) loginHandler(c echo.Context) error {
 
 	token, err := h.Service.Login(email, password)
 	if err != nil {
-		return c.String(http.StatusBadRequest, err.Error())
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
 
+	return c.JSON(http.StatusOK, echo.Map{
+		"token": token,
+	})
+}
+
+func (h UserHandler) getProfileHandler(c echo.Context) error {
+	username := c.QueryParam("username")
+	user, err := h.Service.Get(username)
+	if err != nil {
+		return c.String(http.StatusInternalServerError, err.Error())
+	}
+
+	return c.JSON(http.StatusOK, user)
 }

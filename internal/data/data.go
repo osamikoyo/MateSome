@@ -10,7 +10,7 @@ import (
 type UserStorage interface {
 	Add(user models.User) error
 	Login(email, password string) (string, error)
-	Get(email string) (models.User, error)
+	Get(username string) (models.User, error)
 }
 type QuestStorage interface {
 	Add(quest models.Quest) error

@@ -34,4 +34,11 @@ func (h Handler) RegisterRoutes(e *echo.Echo) {
 	protect := e.Group("/quests", JWTMiddleware)
 	protect.POST("/add", h.Quest.addQuestHandler)
 	protect.POST("/delete", h.Quest.deleteQuestHandler)
+	protect.GET("/self", h.Quest.getByUserIdHandler)
+
+	e.POST("/search/hashtags", h.Quest.getByHashTagsHandler)
+
+	e.POST("/register", h.User.registerHandler)
+	e.POST("/login", h.User.loginHandler)
+	e.GET("/profile/:username", h.User.getProfileHandler)
 }

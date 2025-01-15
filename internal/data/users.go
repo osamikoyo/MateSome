@@ -35,11 +35,11 @@ func (u Users) Login(email, password string) (string, error) {
 	return tokenString, nil
 }
 
-func (u Users) Get(email string) (models.User, error) {
+func (u Users) Get(username string) (models.User, error) {
 	var user models.User
 	if err := u.Where(
 		&models.User{
-			Email: email,
+			Username: username,
 		}).Find(&user).Error; err != nil {
 		return models.User{}, err
 	}
