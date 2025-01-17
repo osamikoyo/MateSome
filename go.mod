@@ -1,8 +1,11 @@
 module github.com/osamikoyo/matesome
 
-go 1.23.0
+go 1.23.1
+
+toolchain go1.23.4
 
 require (
+	github.com/NawafSwe/gomailer v1.0.0 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect

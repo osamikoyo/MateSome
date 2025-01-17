@@ -1,3 +1,5 @@
+github.com/NawafSwe/gomailer v1.0.0 h1:dZkaqCUibL6G6o3gIwPj99Qokhw4hmOGODhlHBy0NbQ=
+github.com/NawafSwe/gomailer v1.0.0/go.mod h1:ZSNFXhnsyJzZTFeMr7IXpi7QMxRmdl9a7iayO8vX6W0=
 github.com/coreos/go-systemd/v22 v22.5.0/go.mod h1:Y58oyj3AT4RCenI/lSvhwexgC+NSVTIJ3seZv2GcEnc=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible h1:7qlOGliEKZXTDg6OTjfoBKDXWrumCAMpl/TFQ4/5kLM=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
