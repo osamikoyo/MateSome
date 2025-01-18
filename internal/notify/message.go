@@ -3,7 +3,5 @@ package notify
 import "github.com/NawafSwe/gomailer/message"
 
 type Message struct {
-	*message.Message
+	message message.Message
 }
-
-func

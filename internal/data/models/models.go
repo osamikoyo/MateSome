@@ -21,6 +21,11 @@ type HashTags struct {
 type Quest struct {
 	ID      uint64   `bson:"id"`
 	UserID  uint64   `bson:"user_id"`
+	Title 	string	 `bson:"title"`
 	Content string   `bson:"content"`
 	HashTag HashTags `bson:"hash_tag"`
+}
+
+type Offer struct{
+	AnswerQuest Quest `bson:"answer_quest"`
 }
