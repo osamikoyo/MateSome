@@ -1,6 +1,10 @@
 package models
 
-import "github.com/dgrijalva/jwt-go"
+import (
+	"time"
+
+	"github.com/dgrijalva/jwt-go"
+)
 
 type Claims struct {
 	Email string `json:"email"`
@@ -27,5 +31,8 @@ type Quest struct {
 }
 
 type Offer struct{
-	AnswerQuest Quest `bson:"answer_quest"`
+	AnswerQuest Quest `bson:"answer_quest" json:"quest"`
+	Email string
+	CreatedAt time.Time
+	CenterQuestTitle string `bson:"center_quest_title" json:"title"`
 }

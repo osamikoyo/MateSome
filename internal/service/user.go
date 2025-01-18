@@ -6,6 +6,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+
 type UserValidator interface {
 	Register(user models.User) error
 	Login(email, password string) (string, error)
@@ -34,6 +35,6 @@ func (u UserService) Login(email, password string) (string, error) {
 	return u.Storage.Login(email, string(hashpassword))
 }
 
-func (u UserService) Get(username string) (models.User, error) {
-	return u.Storage.Get(username)
+func (u UserService) Get(email string) (models.User, error) {
+	return u.Storage.Get(email)
 }
